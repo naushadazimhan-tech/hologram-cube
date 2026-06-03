@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hologram Cube</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#000;
+    overflow:hidden;
+}
+
+.scene{
+    width:200px;
+    height:200px;
+    perspective:800px;
+}
+
+.cube{
+    position:relative;
+    width:120px;
+    height:120px;
+    margin:auto;
+    transform-style:preserve-3d;
+    animation:spin 8s linear infinite;
+}
+
+.face{
+    position:absolute;
+    width:120px;
+    height:120px;
+    border:2px solid #00ffff;
+    background:rgba(0,255,255,0.08);
+    box-shadow:
+        0 0 15px #00ffff,
+        inset 0 0 15px #00ffff;
+}
+
+.front  { transform:translateZ(60px); }
+.back   { transform:rotateY(180deg) translateZ(60px); }
+.right  { transform:rotateY(90deg) translateZ(60px); }
+.left   { transform:rotateY(-90deg) translateZ(60px); }
+.top    { transform:rotateX(90deg) translateZ(60px); }
+.bottom { transform:rotateX(-90deg) translateZ(60px); }
+
+@keyframes spin{
+    0%{
+        transform:rotateX(0deg) rotateY(0deg);
+    }
+    100%{
+        transform:rotateX(360deg) rotateY(360deg);
+    }
+}
+
+/* Glow effect */
+.cube::before{
+    content:"";
+    position:absolute;
+    width:200px;
+    height:200px;
+    left:-40px;
+    top:-40px;
+    background:radial-gradient(circle,
+    rgba(0,255,255,0.4),
+    transparent 70%);
+    filter:blur(30px);
+    z-index:-1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+    <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face right"></div>
+        <div class="face left"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+    </div>
+</div>
+
+</body>
+</html>
